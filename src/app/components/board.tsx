@@ -1,18 +1,27 @@
 import React from 'react';
 import styles from './board.module.css';
 
+function Square({ value }) {
+    return <button className={styles.cell}>{ value }</button>;
+}
+
+
 export default function Board() {
     return (
         <div className={styles.grid}>
-            <button className={styles.cell}>1</button>
-            <button className={styles.cell}>2</button>
-            <button className={styles.cell}>3</button>
-            <button className={styles.cell}>4</button>
-            <button className={styles.cell}>5</button>
-            <button className={styles.cell}>6</button>
-            <button className={styles.cell}>7</button>
-            <button className={styles.cell}>8</button>
-            <button className={styles.cell}>9</button>
+            {/*add the value prop to each Square component rendered by the Board component*/}
+            <Square value={1}/>
+            <Square value={2}/>
+            <Square value={3}/>
+
+            <Square value={4}/>
+            <Square value={5}/>
+            <Square value={6}/>
+
+            <Square value={7}/>
+            <Square value={8}/>
+            <Square value={9}/>
+
         </div>
     );
 };
