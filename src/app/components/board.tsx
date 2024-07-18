@@ -1,11 +1,15 @@
 'use client';
 import React from 'react';
 import styles from './board.module.css';
+import {useState} from 'react'; // call from your component to let it “remember” things.
 
 // @ts-ignore
-function Square({value}) {
+function Square() {
+    const [value, setValue] = useState(null);
+
     function handleClick() {
-        console.log('Button clicked', value);
+        // console.log('Button clicked');
+        setValue('X');
     };
 
     return (
@@ -19,18 +23,17 @@ export default function Board() {
     return (
         <div className={styles.grid}>
             {/*add the value prop to each Square component rendered by the Board component*/}
-            <Square value={1}/>
-            <Square value={2}/>
-            <Square value={3}/>
+            <Square/>
+            <Square/>
+            <Square/>
 
-            <Square value={4}/>
-            <Square value={5}/>
-            <Square value={6}/>
+            <Square/>
+            <Square/>
+            <Square/>
 
-            <Square value={7}/>
-            <Square value={8}/>
-            <Square value={9}/>
-
+            <Square/>
+            <Square/>
+            <Square/>
         </div>
     );
 };
