@@ -1,10 +1,19 @@
+'use client';
 import React from 'react';
 import styles from './board.module.css';
 
-function Square({ value }) {
-    return <button className={styles.cell}>{ value }</button>;
-}
+// @ts-ignore
+function Square({value}) {
+    function handleClick() {
+        console.log('Button clicked', value);
+    };
 
+    return (
+        <button className={styles.cell} onClick={handleClick}>
+            {value}
+        </button>
+    );
+}
 
 export default function Board() {
     return (
