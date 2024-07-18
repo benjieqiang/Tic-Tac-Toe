@@ -21,6 +21,28 @@ export default function Board() {
     // 设置标志位，默认是true，如果上一把
     const [xIsNext, setXIsNext] = useState(true);
 
+    // 程序刚开始进来，先判断有没有winner，有的话，直接显示，没有根据next字段显示谁先开始；默认X；
+    const winner = calculateWinner(squares);
+    let status;
+    if (winner) {
+        status = "Winner: " + winner;
+    } else {
+        status = "Next player: " + (xIsNext ? "X" : "O");
+    }
+
+    function handleClick(i) {
+        // not first click square or winner
+        if (squares[i] || calculateWinner(squares)) {
+            return;
+        }
+
+        const nextSquares = squares.slice();
+        nextSquares[i] = xIsNext ? 'X' : 'O'; // 根据 xIsNext 的值确定下一个方块的符号
+        setSquares(nextSquares); // creates a copy of the squares array (nextSquares) with the JavaScript slice() Array method. Then, handleClick updates the nextSquares array to add X to the first ([0] index) square.
+        setXIsNext(!xIsNext); // 切换 xIsNext 的值，确保下一步是另一个玩家，使用 !xIsNext 可以确保 xIsNext 总是取反，无论当前状态是 true 还是 false。这样做可以保证代码在逻辑上更为一致和可预测
+    }
+
+
     function calculateWinner(squares) {
         const lines = [
             [0, 1, 2], // 水平顶部行
@@ -43,29 +65,6 @@ export default function Board() {
         }
         return null;
     }
-
-
-    const winner = calculateWinner(squares);
-    let status;
-    if (winner) {
-        status = "Winner: " + winner;
-    } else {
-        status = "Next player: " + (xIsNext ? "X" : "O");
-    }
-
-
-    function handleClick(i) {
-        // not first click square or winner
-        if (squares[i] || calculateWinner(squares)) {
-            return;
-        }
-
-        const nextSquares = squares.slice();
-        nextSquares[i] = xIsNext ? 'X' : 'O'; // 根据 xIsNext 的值确定下一个方块的符号
-        setSquares(nextSquares); // creates a copy of the squares array (nextSquares) with the JavaScript slice() Array method. Then, handleClick updates the nextSquares array to add X to the first ([0] index) square.
-        setXIsNext(!xIsNext); // 切换 xIsNext 的值，确保下一步是另一个玩家，使用 !xIsNext 可以确保 xIsNext 总是取反，无论当前状态是 true 还是 false。这样做可以保证代码在逻辑上更为一致和可预测
-    }
-
 
     return (
         <>
