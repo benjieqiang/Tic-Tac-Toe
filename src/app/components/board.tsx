@@ -5,22 +5,32 @@ import {useState} from 'react'; // call from your component to let it “remembe
 
 export default function Game() {
     const [xIsNext, setXIsNext] = useState(true);
-    // 存放历史记录
+    // 存放历史记录，[[],[]...]
     const [history, setHistory] = useState([Array(9).fill(null)]);
-    // history末尾就是最新的移动记录；
-    const currentSquares = history[history.length - 1];
+    // 记录当前的移动
+    const [currentMove, setCurrentMove] = useState(0);
+    const currentSquares = history[currentMove];
 
+    /**
+     * 用户点击任意宫格会调用该函数
+     * @param nextSquares  一个当前棋盘对象的最新副本
+     */
     function handlePlay(nextSquares) {
         //这是一个 JavaScript 的扩展运算符（spread operator），用于展开数组 history。
         // setHistory,这是将当前的 history 与新的棋盘状态 nextSquares 合并成一个新的数组。
         console.log("nextSaures = ", nextSquares);
-        setHistory([...history, nextSquares]);
+        const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+        setHistory(nextHistory);
+        setCurrentMove(nextHistory.length - 1);
         setXIsNext(!xIsNext);
         console.log(history);
     }
 
     function jumpTo(nextMove) {
         console.log("jump to ", nextMove);
+        setCurrentMove(nextMove);
+        console.log("nextMove % 2 === 0, ", nextMove % 2 === 0)
+        setXIsNext(nextMove % 2 === 0); // nextMove为奇数，xIsNext设置为false，表示下一步是O，为偶数，表示设置下一步为X；
     }
 
 
