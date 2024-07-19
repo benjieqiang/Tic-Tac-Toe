@@ -1,12 +1,12 @@
 'use client';
 import React from 'react';
-import styles from './board.module.css';
+import styles from '../styles/board.module.css';
 import {useState} from 'react'; // call from your component to let it “remember” things.
 
 // @ts-ignore
 function Square({value, onSquareClick}) {
     return (
-        <button className={styles.cell} onClick={onSquareClick}>
+        <button className={styles.square} onClick={onSquareClick}>
             {value}
         </button>
     );
@@ -68,8 +68,8 @@ export default function Board() {
 
     return (
         <>
-            <div>{status}</div>
-            <div className={styles.grid}>
+            <div className = {styles.title}>{status}</div>
+            <div className={styles.board}>
                 {/*add the value prop to each Square component rendered by the Board component*/}
                 {squares.map((value, index) => (
                     // eslint-disable-next-line react/jsx-key
@@ -78,8 +78,7 @@ export default function Board() {
             </div>
         </>
 
-    )
-        ;
+    );
 
 
 };
