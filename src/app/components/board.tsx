@@ -7,6 +7,7 @@ export default function Game() {
     const [xIsNext, setXIsNext] = useState(true);
     // 存放历史记录
     const [history, setHistory] = useState([Array(9).fill(null)]);
+    // history末尾就是最新的移动记录；
     const currentSquares = history[history.length - 1];
 
     function handlePlay(nextSquares) {
@@ -18,13 +19,33 @@ export default function Game() {
         console.log(history);
     }
 
+    function jumpTo(nextMove) {
+        console.log("jump to ", nextMove);
+    }
+
+
+    const moves = history.map((squares, move) => {
+        let description;
+        if (move > 0) {
+            description = 'Go to move #' + move;
+        } else {
+            description = 'Go to game start';
+        }
+        return (
+            <li key={move}>
+                <button onClick={() => jumpTo(move)}>{description}</button>
+            </li>
+        );
+    });
+
+
     return (
         <div className="game">
             <div className="game-board">
                 <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay}/>
             </div>
             <div className="game-info">
-                <ol>{/*TODO*/}</ol>
+                <ol>{moves}</ol>
             </div>
         </div>
     );
@@ -56,6 +77,7 @@ function Board({xIsNext, squares, onPlay}) {
         status = 'Next player: ' + (xIsNext ? 'X' : 'O');
     }
 
+    // @ts-ignore
     return (
         <>
             <div className={styles.title}>{status}</div>

@@ -1,14 +1,19 @@
 /* components/styles/board.module.css */
 .game {
-
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px; /* 调整棋盘和文字之间的间距 */
 }
 
 .game-board {
-
+    display: flex;
+    flex-direction: column;
 }
 
 .game-info {
-
+    display: flex;
+    flex-direction: column;
 }
 
 .board {
