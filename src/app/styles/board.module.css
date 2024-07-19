@@ -1,10 +1,24 @@
 /* components/styles/board.module.css */
+.game {
+
+}
+
+.game-board {
+
+}
+
+.game-info {
+
+}
+
 .board {
     display: grid;
-    grid-template-columns: repeat(3, 50px);
-    grid-template-rows: repeat(3, 50px);
-    gap: 1px;
-    border: 1px solid black;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 0px;
+    border: 2px solid black;
+    width: 150px; /* 根据需要调整 */
+    height: 150px; /* 根据需要调整 */
 }
 
 .square {
